@@ -1,24 +1,8 @@
-import os
-import subprocess
 import matplotlib.pyplot as plt
-import random
 import numpy as np
-import pandas as pd
 import seaborn as sns
 sns.set()
 
-# os.chdir("/home/gabor/PycharmProjects/linear_regression/")
-#
-# subprocess.call(["ls", "-l"])
-#
-#
-# data = pd.read_csv("./x01.txt", index_col=0)
-# print(data.head())
-#
-# y_train = data.iloc[:-10, 0]
-# x_train = data.iloc[:-10, 1]
-# y_test = data.iloc[-10:, 0]
-# x_test = data.iloc[-10:, 1]
 
 ''' Data Generating Process (DGP) '''
 np.random.seed(100)
@@ -39,11 +23,11 @@ y_test = y[~idx_train]
 x_test = x[~idx_train]
 
 # Here we plot the in-sample data, that we will use to predict the "True" model (red line)
-# plt.scatter(x_train, y_train, label='Scatter-plot of training values')
-# plt.plot(x_train, α + β * x_train, color='r', label='The DGP true model')
-# plt.legend()
-# plt.title('Training Data')
-# plt.show()
+plt.scatter(x_train, y_train, label='Scatter-plot of training values')
+plt.plot(x_train, α + β * x_train, color='r', label='The DGP true model')
+plt.legend()
+plt.title('Training Data')
+plt.show()
 
 
 ''' Least Squares '''
@@ -127,13 +111,13 @@ s_b = s / np.sqrt(np.sum((x_train - x_train_mean) ** 2))
 t_b = b / s_b
 t_dist = np.random.standard_t(int(0.85 * N) - 2, size=100000)
 
-# plt.hist(t_dist, bins=100, color='blue')
-# plt.axvline(t_b, color='r')
-# plt.axvline(1.96, color='black')
-# plt.axvline(-1.96, color='black')
-# plt.show()
-# Given the above plot, we might safely reject the null hypothesis and accept that there is a linear relationship
-# between x and y
+plt.hist(t_dist, bins=100, color='blue')
+plt.axvline(t_b, color='r')
+plt.axvline(1.96, color='black')
+plt.axvline(-1.96, color='black')
+plt.show()
+# Given the above plot, we might safely reject the null hypothesis and accept the alternative
+# that b is non-zero
 
 
 ''' Prediction '''
